@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>회원가입 - 안전하고 빠른 계정 생성</title>
+        <meta name="description" content="간편한 아이디와 비밀번호로 계정을 생성하고 서비스를 시작하세요. 사용자 친화적인 회원가입 양식을 제공합니다.">
+        <meta name="keywords" content="회원가입, 계정 생성, 사용자 등록, 서비스 가입, 비밀번호, 아이디">
+        <meta name="author" content="Your Company Name">
+
+        <link rel="canonical" href="http://yourdomain.com/register">
+        <link rel="stylesheet" href="/css/lepton.css">
+
+        <meta property="og:title" content="회원가입 - [서비스 이름]">
+        <meta property="og:description" content="간편하게 계정을 만들고 저희 서비스를 경험해보세요!">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://yourdomain.com/register">
+        <meta property="og:image" content="http://yourdomain.com/images/signup-thumbnail.jpg"> <meta property="og:image:alt" content="회원가입 페이지">
+
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+            <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Arma75/lepton-css@v0.0.2/lepton.css"> -->
+    </head>
+
+    <body class="flex flex-center pad-10 min-h-100vh">
+        <main class="card bg-white shadow-md flex flex-col flex-center gap-5 w-90 max-w-100p pad-8">
+            <!-- <img src="logo1.png" class="wh-25" style="border-radius: 999em; background-color: black; text-indent: -9999px;"/> -->
+            <img src="logo.png" class="wh-25"/>
+
+            <div class="flex flex-center flex-col">
+                <h3>SIGN UP</h3>
+                <p class="txt-lvl-2">Create an account</p>
+            </div>
+
+            <form class="flex flex-col gap-3 w-full" id="signupForm">
+                <div class="flex flex-col gap-1">
+                    <label for="emailInput" class="txt-lvl-3 txt-w-light">Email</label>
+                    <input type="text" id="emailInput" name="email" required/>
+                    <p class="help-message txt-lvl-3">4~20 characters of English letters and numbers</p>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label for="passwordInput" class="txt-lvl-3 txt-w-light">Password</label>
+                    <input type="password" id="passwordInput" name="password" required/>
+                    <p class="help-message txt-lvl-3">8 characters or more, including English letters/numbers/special characters</p>
+                    <div class="error-message"></div>
+                </div>
+
+                <button type="submit" id="submitButton" class="btn-primary btn-md" aria-label="회원가입 완료">Create an account</button>
+            </form>
+        </main>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const signupForm = document.getElementById('signupForm');
+                const emailInput = document.getElementById('emailInput');
+                const passwordInput = document.getElementById('passwordInput');
+
+                signupForm.addEventListener('submit', async (event) => {
+                    // 새로고침 방지
+                    event.preventDefault();
+
+                    const username = emailInput.value.trim();
+                    const password = passwordInput.value.trim();
+
+                    try {
+                        // Fetch API를 사용하여 백엔드 API로 데이터 전송
+                        const response = await fetch('/users', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ email: username, password: password })
+                        });
+
+                        // 백엔드로부터 받은 JSON 응답을 파싱합니다.
+                        const data = await response.json();
+
+                        console.info(response);
+                        console.info(data);
+                        alert(data.message);
+                    } catch (error) {
+                        // 네트워크 오류 등 요청 자체가 실패한 경우
+                        console.error('Fetch error:', error);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

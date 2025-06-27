@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    position: relative; /* 메시지 위치 조정을 위해 */
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.intro-text {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+input {
+    width: calc(100% - 20px); /* 패딩 고려 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.help-text {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+
+.error-message {
+    font-size: 0.85em;
+    color: #dc3545; /* 빨간색 */
+    margin-top: 5px;
+    margin-left: 2px;
+    min-height: 1.2em; /* 오류 메시지가 나타나지 않을 때 공간 확보 */
+}
+
+.message {
+    margin-top: 20px;
+    font-weight: bold;
+    /* global-message를 위해 min-height를 줘서 레이아웃 흔들림 방지 */
+    min-height: 1.5em;
+}
+
+.success {
+    color: #28a745; /* 초록색 */
+}
+
+.error {
+    color: #dc3545; /* 빨간색 */
+}
+
+/* 스크린 리더에서만 읽히고 시각적으로는 숨겨지는 클래스 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

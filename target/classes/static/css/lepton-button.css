@@ -1,0 +1,95 @@
+button {
+    height: 2.25rem;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    background-color: rgb(var(--neutral-color-100));
+    border: 1px solid rgb(var(--neutral-color-200));
+    box-shadow: 0 0.125rem 0.25rem #0002;
+    cursor: pointer;
+}
+button:focus, button:focus-visible {
+    outline: none;
+    box-shadow: 0 0.25rem 0.25rem #0002;
+}
+@media (hover: hover) and (pointer: fine) {
+    button:hover {
+        box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0.03), 0 0.25rem 0.25rem #0002;
+    }
+}
+button:active {
+    box-shadow: inset 0 0 0 100vw rgba(0, 0, 0, 0.06), 0 0.25rem 0.25rem #0002;
+}
+button:disabled {
+    background-color: rgb(var(--neutral-color-200));
+    border-color: rgb(var(--neutral-color-300));
+    cursor: not-allowed;
+    color: rgb(var(--neutral-color-600));
+    box-shadow: none;
+}
+
+button.btn-3sm {
+    height: 1.5rem;
+    padding: 0 0.625rem;
+    border-radius: 0.33rem;
+    font-size: 0.625rem;
+}
+button.btn-2sm {
+    height: 1.75rem;
+    padding: 0 0.75rem;
+    border-radius: 0.39rem;
+    font-size: 0.75rem;
+}
+button.btn-sm {
+    height: 2rem;
+    padding: 0 0.875rem;
+    border-radius: 0.44rem;
+    font-size: 0.875rem;
+}
+button.btn-md {
+    height: 2.25rem;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+button.btn-lg {
+    height: 2.5rem;
+    padding: 0 1.125rem;
+    border-radius: 0.56rem;
+    font-size: 1.125rem;
+}
+button.btn-2lg {
+    height: 2.75rem;
+    padding: 0 1.25rem;
+    border-radius: 0.61rem;
+    font-size: 1.25rem;
+}
+button.btn-3lg {
+    height: 3rem;
+    padding: 0 1.375rem;
+    border-radius: 0.67rem;
+    font-size: 1.375rem;
+}
+button.btn-4lg {
+    height: 3.25rem;
+    padding: 0 1.5rem;
+    border-radius: 0.72rem;
+    font-size: 1.5rem;
+}
+button.btn-5lg {
+    height: 3.5rem;
+    padding: 0 1.725rem;
+    border-radius: 0.78rem;
+    font-size: 1.725rem;
+}
+
+
+button.btn-primary {
+    background-color: rgb(var(--primary-color-500));
+    border: 1px solid rgb(var(--primary-color-600));
+    color: rgb(var(--primary-color-50));
+}
+button.btn-secondary {
+    background-color: rgb(var(--secondary-color-500));
+    border: 1px solid rgb(var(--secondary-color-600));
+    color: rgb(var(--secondary-color-50));
+}

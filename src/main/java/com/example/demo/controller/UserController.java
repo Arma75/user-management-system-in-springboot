@@ -5,6 +5,8 @@ import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
+
+    /*
+     * 회원가입
+     * 회원탈퇴
+     * 로그인
+     * 로그아웃
+     * 회원여부조회
+     * 
+     */
 
     @PostMapping
     public ResponseEntity<Map<String, String>> create(@RequestBody User user) {
@@ -38,5 +49,17 @@ public class UserController {
         userRepository.save(user);
         response.put("message", "회원가입이 성공적으로 완료되었습니다.");
         return new ResponseEntity<>(response, HttpStatus.CREATED); // 201 Created
+    }
+
+    /**
+     * TODO: 회원 정보 조회 API
+     * GET /users/{email}
+     * @param email 조회할 사용자 이메일
+     * @return 사용자 정보
+     */
+    @GetMapping("/{userId}")
+    public ResponseEntity<Map<String, String>> getUserProfile(@PathVariable Long userId) {
+        Map<String, String> response = new HashMap<>();
+        return new ResponseEntity<>(response, HttpStatus.CONTINUE);
     }
 }

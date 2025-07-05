@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.User;
+import com.example.demo.dto.ApiResponse;
+import com.example.demo.exception.DuplicateEmailException;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,17 +36,31 @@ public class UserController {
      */
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> create(@RequestBody User user) {
-        Map<String, String> response = new HashMap<>();
+    public ResponseEntity<ApiResponse> create(@RequestBody User user) {
         try {
             userService.signup(user);
 
-            response.put("message", "회원가입이 성공적으로 완료되었습니다.");
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
-        } catch( Exception e ) {
+            return new ResponseEntity<>(new ApiResponse("회원 가입이 성공적으로 완료되었습니다.", true), HttpStatus.CREATED);
+        } catch( DuplicateEmailException e ) {
             // 이메일 중복 예외 처리
-            response.put("message", "이미 가입된 이메일입니다.");
-            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new ApiResponse("이미 가입된 이메일입니다.", false), HttpStatus.CONFLICT);
+        } catch( Exception e ) {
+            // 지정되지 않은 예외 발생
+            return new ResponseEntity<>(new ApiResponse("회원 가입이 실패하였습니다. 관리자에게 문의해주세요.", false), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{email}")
+    public ResponseEntity<ApiResponse> delete(@PathVariable String email) {
+        try {
+            //userService.withdrawal(email);
+
+            return new ResponseEntity<>(new ApiResponse("회원 탈퇴가 성공적으로 완료되었습니다.", true), HttpStatus.OK);
+        } catch( UserNotFoundException e ) {
+            return new ResponseEntity<>(new ApiResponse("회원 정보가 존재하지 않습니다.", false), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            // 지정되지 않은 예외 발생
+            return new ResponseEntity<>(new ApiResponse("회원 가입이 실패하였습니다. 관리자에게 문의해주세요.", false), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
